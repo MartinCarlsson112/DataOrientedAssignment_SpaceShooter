@@ -1,13 +1,25 @@
 ﻿using Unity.Entities;
+using Unity.Collections;
 public class CollisionResponseSystem : SystemBase
 {
     EntityCommandBufferSystem Barrier => World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
 
+    EntityQuery query;
+    EntityQuery damageableQuery;
+
+    protected override void OnCreate()
+    {
+        var desc = new EntityQueryDesc { All = new ComponentType[] { typeof(Faction) } };
+        var damageableDesc = new EntityQueryDesc { All = new ComponentType[] { typeof(Damageable) } };
+        query = GetEntityQuery(desc);
+        damageableQuery = GetEntityQuery(damageableDesc);
+    }
+
     protected override void OnUpdate()
     {
-        var em = World.EntityManager;
         var commandBuffer =  Barrier.CreateCommandBuffer().ToConcurrent();
-
+        var entities = query.ToEntityArray(Allocator.TempJob);
+        var damageableEntities = damageableQuery.ToEntityArray(Allocator.TempJob);
         Dependency = Entities.ForEach((Entity entity, int entityInQueryIndex, ref DynamicBuffer<CollisionResult> collisions, in Player player) => {
             for(int i = 0; i<  collisions.Length; i++)
             {
@@ -22,21 +34,20 @@ public class CollisionResponseSystem : SystemBase
         {
             for (int i = 0; i < collisions.Length; i++)
             {
-                if (em.HasComponent<Faction>(collisions[i].other))
+                if(entities.Contains(collisions[i].other))
                 {
-                    var otherFaction = em.GetComponentData<Faction>(collisions[i].other);
+                    var otherFaction = GetComponent<Faction>(collisions[i].other);
                     if (otherFaction.value != faction.value)
                     {
-                        if(em.HasComponent<Damageable>(collisions[i].other))
+                        if (damageableEntities.Contains(collisions[i].other))
                         {
                             commandBuffer.AppendToBuffer<DamageEvent>(entityInQueryIndex, collisions[i].other, new DamageEvent() { damage = bullet.damage });
                         }
                         commandBuffer.DestroyEntity(entityInQueryIndex, entity);
                     }
                 }
-
             }
-        }).WithNativeDisableParallelForRestriction(em).ScheduleParallel(Dependency);
+        }).WithNativeDisableParallelForRestriction(entities).ScheduleParallel(Dependency);
         Barrier.AddJobHandleForProducer(Dependency);
         Dependency.Complete();
 
@@ -49,5 +60,8 @@ public class CollisionResponseSystem : SystemBase
             }
         }).ScheduleParallel(Dependency);
         Barrier.AddJobHandleForProducer(Dependency);
+
+        entities.Dispose();
+        damageableEntities.Dispose();
     }
 }
