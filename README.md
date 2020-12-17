@@ -2,6 +2,7 @@
 
 ## How to play the game:
 WASD to move.
+
 Space to shoot.
 
 ## "How I made the systems in a data oriented fashion"
