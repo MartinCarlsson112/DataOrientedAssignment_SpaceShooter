@@ -19,7 +19,7 @@ The collision results buffers are cleared at the start of each collision system 
 
 ### Collision Response
 
-The collision response system iterates through the collision results to resolve collisions. To interact with other systems the idea is to add/remove buffers/components to communicate. For example a bullet damaging an enemy will append a DamageEvent buffer element. Other system then iterate those buffers to evaluate what to do.
+The collision response system iterates through the collision results to resolve collisions. To interact with other systems the idea is to add/remove buffers/components to communicate. For example a bullet damaging an enemy will append a DamageEvent buffer element. Another system will then iterate those buffers to evaluate the damage.
 
 ### Damage System
 
