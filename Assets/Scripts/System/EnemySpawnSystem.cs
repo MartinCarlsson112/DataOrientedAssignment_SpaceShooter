@@ -37,6 +37,7 @@ public class EnemySpawnSystem : SystemBase
                          typeof(Velocity),
                          typeof(Faction),
                          typeof(Health),
+                         typeof(Cooldown),
                          typeof(ColliderComponent),
                          typeof(Speed),
                          typeof(RenderBounds),
@@ -93,7 +94,8 @@ public class EnemySpawnSystem : SystemBase
         EntityManager.SetComponentData(enemyEntity, new Faction() { value = FactionUtil.ENEMY_FACTION });   
         EntityManager.SetComponentData(enemyEntity, ColliderHelper.MakeBoxCollider(new Unity.Mathematics.float3(3.5f, 1.0f, 0.5f), false));
         EntityManager.SetComponentData(enemyEntity, new Health() { current = prefab.health, max = prefab.health });
-        EntityManager.SetComponentData(enemyEntity, new Enemy() { sightRange = prefab.sightRange, attackRange = prefab.attackRange, leeWay = prefab.leeway });
+        EntityManager.SetComponentData(enemyEntity, new Enemy() { sightRange = prefab.sightRange, attackRange = prefab.attackRange, leeWay = prefab.leeway, bulletPrefab = prefab.bulletPrefabIndex });
+        EntityManager.SetComponentData(enemyEntity, new Cooldown() { accu = 0, cd = prefab.shootCd });
         EntityManager.AddBuffer<CollisionResult>(enemyEntity);
         EntityManager.AddBuffer<DamageEvent>(enemyEntity);
         EntityManager.AddComponent<Damageable>(enemyEntity);
@@ -104,6 +106,12 @@ public class EnemySpawnSystem : SystemBase
     {
         if(!enemyPrefabsLoaded || !enemyWaveSettingsLoaded)
         {
+            return;
+        }
+
+        if(waveCounter >= waveSettings.waves.Count)
+        {
+            //wave spawning finished
             return;
         }
 

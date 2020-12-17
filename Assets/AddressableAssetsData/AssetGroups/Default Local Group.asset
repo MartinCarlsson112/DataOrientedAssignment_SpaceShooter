@@ -37,6 +37,10 @@ MonoBehaviour:
     m_Address: BasicBullet
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: a429142aaa67fff469584de02efd5cdb
+    m_Address: PlayerSettings
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: d363f098ad7b6114db54e6e77b57a8af
     m_Address: EnemyWaveSettings
     m_ReadOnly: 0

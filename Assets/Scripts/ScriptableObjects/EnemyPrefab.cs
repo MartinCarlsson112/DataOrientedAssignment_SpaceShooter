@@ -10,6 +10,8 @@ public struct EnemyPrefabData
     public float health;
     public float attackRange;
     public float leeway;
+    public int bulletPrefabIndex;
+    public float shootCd;
 }
 
 [CreateAssetMenu(fileName = "EnemyPrefab", menuName = "ScriptableObjects/EnemyPrefab")]

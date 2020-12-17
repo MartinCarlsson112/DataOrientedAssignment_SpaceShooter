@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
   speed: 12
+  mesh: {fileID: 5006569119915696325, guid: 2340d0cd51c10864bb58916cd6770ffc, type: 3}
+  material: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  cd: 0.1
+  health: 10
+  colliderSize: {x: 1.5, y: 1.5, z: 1.5}

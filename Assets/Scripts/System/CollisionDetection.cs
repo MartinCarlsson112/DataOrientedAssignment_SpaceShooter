@@ -31,7 +31,6 @@ class CollisionSystem : SystemBase
 
     protected override void OnUpdate()
     {
-
         Dependency = Entities.WithBurst().ForEach((ref DynamicBuffer<CollisionResult> collisionRes) =>
         {
             collisionRes.Clear();

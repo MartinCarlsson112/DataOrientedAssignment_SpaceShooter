@@ -20,3 +20,5 @@ MonoBehaviour:
     health: 10
     attackRange: 15
     leeway: 5
+    bulletPrefabIndex: 0
+    shootCd: 0.5

@@ -18,14 +18,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     waitForAllDead: 1
-    timeUntilNextWave: 10
+    timeUntilNextWave: 5
   - enemiesToSpawn:
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     waitForAllDead: 1
-    timeUntilNextWave: 15
+    timeUntilNextWave: 7
   - enemiesToSpawn:
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
@@ -34,7 +34,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     waitForAllDead: 0
-    timeUntilNextWave: 15
+    timeUntilNextWave: 8
   - enemiesToSpawn:
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
     - {fileID: 11400000, guid: 26ab402c265a6d645b76a371cb770a87, type: 2}
